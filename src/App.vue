@@ -1,5 +1,6 @@
 <template>
   <div class="flex flex-col h-screen justify-between">
+    
   <header>
     <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
@@ -42,13 +43,7 @@
     </nav>
   </header>
 
-
-
   <HelloWorld msg="Welcome to Your Vue.js App"/>
-
-
-
-
 
   <footer class="bg-white dark:bg-gray-900">
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
@@ -134,8 +129,6 @@
       </div>
     </div>
 </footer>
-
-
 
 </div>
 
