@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col h-screen justify-between">
-    
+
   <header>
     <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
@@ -92,7 +92,7 @@
       </div>
       <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
       <div class="sm:flex sm:items-center sm:justify-between">
-          <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline">Flowbite™</a>. All Rights Reserved.
+          <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://flowbite.com/" class="hover:underline">Okuuim™</a>. All Rights Reserved.
           </span>
           <div class="flex mt-4 sm:justify-center sm:mt-0">
               <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
