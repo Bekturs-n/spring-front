@@ -109,7 +109,7 @@
                 <td class="px-4 py-3" style="color: white;">{{ row.lastName }}</td>
                 <td class="px-4 py-3 max-w-[12rem] truncate">
                   <button 
-                    @click="Edit1(row.id, row.firstName, row.lastName)"
+                    @click="Edit1(row.id, row.firstName, row.lastName, row.email)"
                     type="button" 
                     class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
                     Изменить
@@ -542,7 +542,8 @@ export default {
       updateData:{
         id:'',
         name:'',
-        surname:''
+        surname:'',
+        email:''
       }
     };
   },
@@ -568,11 +569,13 @@ export default {
       console.log(this.into);
     },
 
-    Edit1(id, stName, stSurname) {
+    Edit1(id, stName, stSurname, email) {
+      console.log('var' + email);
       this.updateModal = true;
       this.updateData.id = id;
       this.updateData.name = stName;
       this.updateData.surname = stSurname;
+      this.updateData.email = email;
     },
 
     Update() {
@@ -580,6 +583,7 @@ export default {
       obj.id = this.updateData.id;
       obj.firstName = this.updateData.name;
       obj.lastName = this.updateData.surname;
+      obj.email = this.updateData.email;
       axios.put("/student", obj).then((response) => {
         this.resolve(response.data);
       });
