@@ -43,7 +43,9 @@
     </nav>
   </header>
 
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <router-view/>
+
+  <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
 
   <footer class="bg-white dark:bg-gray-900">
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
@@ -137,14 +139,14 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+// export default {
+//   name: 'App',
+//   components: {
+//     HelloWorld
+//   }
+// }
 </script>
 
 <style>

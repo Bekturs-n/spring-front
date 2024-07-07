@@ -21,6 +21,11 @@ npm run build
 npm run lint
 ```
 
+### Дополнительные компонеты 
+```
+был устновлени роутер - npm install vue-router@4
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 

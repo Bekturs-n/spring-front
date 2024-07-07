@@ -48,8 +48,9 @@
             <button
               @click="addStudentModalActive = true"
               type="button"
-              class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+              disabled = "true"
             >
+            <!-- class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800" -->
               <span
                 class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
               >
@@ -550,23 +551,49 @@ export default {
 
   methods: {
     fetchData() {
-      try {
-        axios.get("/student").then((response) => {
-          this.into = JSON.parse(JSON.stringify(response.data));
-        });
-      } catch (err) {
-        console.error(err);
+      var token = localStorage.getItem("token");
+      if (token === null) {
+          this.$router.push("/auth");
+      } else {
+        try {
+          axios.get("/student", {
+            headers: {
+              "Content-Type": 'application/json',
+              Authorization:'Bearer ' + token
+            }
+          })
+          .then((response) => {
+            this.into = JSON.parse(JSON.stringify(response.data));
+          }).catch((error) => {
+            if (error.response.status === 401) {
+              window.location = 'http://localhost:9000/auth';
+            }
+            // console.log(error.response.status);
+          });
+        } catch (error) {
+          console.error(error);
+        }
       }
     },
 
     Delete(id, idx) {
-      axios.delete("/student/" + id);
-      var g = [];
-      for (var i = idx + 1; i < this.into.length; i++) {
-        g.push(this.into[i]);
+      var token = localStorage.getItem("token");
+      if (token === null) {
+          this.$router.push("/auth");
+      } else {
+        axios.delete("/student/" + id, {
+          headers: {
+              "Content-Type": 'application/json',
+              Authorization:'Bearer ' + token
+            }
+        });
+        var g = [];
+        for (var i = idx + 1; i < this.into.length; i++) {
+          g.push(this.into[i]);
+        }
+        this.into = g;
+        console.log(this.into);
       }
-      this.into = g;
-      console.log(this.into);
     },
 
     Edit1(id, stName, stSurname, email) {
@@ -579,25 +606,43 @@ export default {
     },
 
     Update() {
-      var obj = {};
-      obj.id = this.updateData.id;
-      obj.firstName = this.updateData.name;
-      obj.lastName = this.updateData.surname;
-      obj.email = this.updateData.email;
-      axios.put("/student", obj).then((response) => {
-        this.resolve(response.data);
-      });
+      var token = localStorage.getItem("token");
+      if (token === null) {
+          this.$router.push("/auth");
+      } else {
+        var obj = {};
+        obj.id = this.updateData.id;
+        obj.firstName = this.updateData.name;
+        obj.lastName = this.updateData.surname;
+        obj.email = this.updateData.email;
 
-      this.fetchData();
+        axios.put("/student", obj, {
+          headers: {
+              "Content-Type": 'application/json',
+              Authorization:'Bearer ' + token
+            }
+          })
+        .then((response) => {
+            this.resolve(response.data);
+            this.$router.push("/");
+        });
+
+        this.fetchData();
+      }
     },
 
     SaveNewStudent() {
-      var obj = {};
-      obj.firstName = document.getElementById("name").value;
-      obj.lastName = document.getElementById("surname").value;
-      obj.email = document.getElementById("email").value;
-      axios.post("/student", obj);
-      this.fetchData();
+      var token = localStorage.getItem("token");
+      if (token === null) {
+          this.$router.push("/auth");
+      } else {
+        var obj = {};
+        obj.firstName = document.getElementById("name").value;
+        obj.lastName = document.getElementById("surname").value;
+        obj.email = document.getElementById("email").value;
+        axios.post("/student", obj);
+        this.fetchData();
+      }
     },
   },
 };
